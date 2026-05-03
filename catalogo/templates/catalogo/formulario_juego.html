@@ -1,0 +1,61 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}{{ accion }} juego — Videoteca Retro{% endblock %}
+
+{% block contenido %}
+<h1>{{ accion }} videojuego</h1>
+
+<div class="form-card">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo"
+                   value="{{ juego.1|default:'' }}{{ datos.titulo|default:'' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="plataforma">Plataforma</label>
+            <input type="text" id="plataforma" name="plataforma"
+                   value="{{ juego.2|default:'' }}{{ datos.plataforma|default:'' }}"
+                   placeholder="NES, PC, PS4…" required>
+        </div>
+
+        <div class="form-group">
+            <label for="anio">Año de lanzamiento</label>
+            <input type="number" id="anio" name="anio"
+                   value="{{ juego.3|default:'' }}{{ datos.anio|default:'' }}"
+                   min="1970" max="2026" required>
+        </div>
+
+        <div class="form-group">
+            <label for="genero">Género</label>
+            <input type="text" id="genero" name="genero"
+                   value="{{ juego.4|default:'' }}{{ datos.genero|default:'' }}"
+                   placeholder="RPG, Shooter, Puzzle…" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo">Formato</label>
+            <select id="tipo" name="tipo">
+                <option value="Físico"  {% if juego.5 == 'Físico'  %}selected{% endif %}>Físico</option>
+                <option value="Digital" {% if juego.5 == 'Digital' %}selected{% endif %}>Digital</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="extra">Estantería / URL de descarga</label>
+            <input type="text" id="extra" name="extra"
+                   value="{{ juego.6|default:'' }}{{ datos.extra|default:'' }}"
+                   placeholder="Estante A1 o https://…" required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{{ accion }}</button>
+            <a href="{% url 'coleccion' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

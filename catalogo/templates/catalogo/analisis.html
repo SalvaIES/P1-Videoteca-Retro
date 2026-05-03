@@ -1,0 +1,21 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Análisis — Videoteca Retro{% endblock %}
+
+{% block contenido %}
+<h1>Análisis estadístico</h1>
+
+{% if grafica %}
+    <div style="background:#16213e; border-radius:10px; padding:1.5rem;">
+        <img src="data:image/png;base64,{{ grafica }}"
+             alt="Gráficas de análisis de la colección"
+             style="width:100%; border-radius:6px;">
+    </div>
+{% else %}
+    <p style="color:#888;">
+        No hay suficientes datos para generar el análisis.
+        <a href="{% url 'añadir_juego' %}">Añade videojuegos</a> primero.
+    </p>
+{% endif %}
+
+{% endblock %}

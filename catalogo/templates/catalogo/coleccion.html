@@ -1,0 +1,60 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Colección — Videoteca Retro{% endblock %}
+
+{% block contenido %}
+<h1>Mi Colección</h1>
+
+<p style="margin-bottom:1.5rem; color:#a0a0c0;">
+    {{ registros|length }} videojuego{{ registros|length|pluralize }} en la biblioteca.
+</p>
+
+{% if registros %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Año</th>
+            <th>Género</th>
+            <th>Tipo</th>
+            <th>Extra</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in registros %}
+        <tr>
+            <td>{{ r.0 }}</td>
+            <td>{{ r.1 }}</td>
+            <td>{{ r.3 }}</td>
+            <td>{{ r.4 }}</td>
+            <td>{{ r.5 }}</td>
+            <td style="font-size:0.8rem; color:#888;">{{ r.6 }}</td>
+            <td>
+                {% if r.7 %}
+                    <span class="badge-prestado">📤 {{ r.7 }}</span>
+                {% else %}
+                    <span class="badge-biblioteca">✅ En biblioteca</span>
+                {% endif %}
+            </td>
+            <td style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <a class="btn btn-warning" href="{% url 'editar_juego' r.0 %}">Editar</a>
+                <a class="btn btn-danger"  href="{% url 'eliminar_juego' r.0 %}">Borrar</a>
+                {% if r.7 %}
+                    <a class="btn btn-success" href="{% url 'devolver_juego' r.0 %}">Devolver</a>
+                {% else %}
+                    <a class="btn btn-secondary" href="{% url 'prestar_juego' r.0 %}">Prestar</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p style="color:#888;">La videoteca está vacía. <a href="{% url 'añadir_juego' %}">Añade tu primer juego</a>.</p>
+{% endif %}
+
+{% endblock %}

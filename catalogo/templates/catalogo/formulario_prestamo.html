@@ -1,0 +1,25 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Prestar juego — Videoteca Retro{% endblock %}
+
+{% block contenido %}
+<h1>Registrar préstamo</h1>
+
+<div class="form-card">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="destinatario">Nombre del prestatario</label>
+            <input type="text" id="destinatario" name="destinatario"
+                   placeholder="¿A quién se lo prestas?" required autofocus>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Registrar préstamo</button>
+            <a href="{% url 'coleccion' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

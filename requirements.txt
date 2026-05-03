@@ -1,0 +1,4 @@
+django>=4.2
+matplotlib>=3.7
+pandas>=2.0
+pytest>=9.0

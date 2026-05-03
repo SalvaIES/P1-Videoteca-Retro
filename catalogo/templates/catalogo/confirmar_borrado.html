@@ -1,0 +1,22 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Eliminar juego — Videoteca Retro{% endblock %}
+
+{% block contenido %}
+<h1>Eliminar videojuego</h1>
+
+<div class="confirm-card">
+    <p>
+        ¿Seguro que quieres eliminar <strong>{{ juego.1 }}</strong>
+        ({{ juego.2 }}, {{ juego.3 }})?<br>
+        Esta acción no se puede deshacer.
+    </p>
+
+    <form method="post" style="display:flex; gap:0.75rem;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'coleccion' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}
